@@ -17,7 +17,8 @@ namespace PlanYourHeist
             //Prompt the user to enter a team member's name and save that name.   
 
             List<Member> memberList = new List<Member>();
-
+            int diffLevel = 100;
+            int skillSum = 0;
             bool stillInputting = true;
             while(stillInputting) {
             Console.WriteLine("Enter team member's name:");
@@ -43,11 +44,15 @@ namespace PlanYourHeist
             Console.WriteLine("This team is comprised of " + memberList.Count + " people");
 
             for(int i = 0; i < memberList.Count; i++) {
-                Console.WriteLine(memberList[i].Name);
-                Console.WriteLine("he/she has a skill level of " + memberList[i].SkillLevel);
-                Console.WriteLine("he/she has a courage factor of " + memberList[i].CourageFactor);
+                skillSum += memberList[i].SkillLevel;
             }
 
+            if(skillSum >= diffLevel ) {
+                Console.WriteLine("Success");
+            }
+            else {
+                Console.WriteLine("Failure");
+            }
         }
     }
 }
