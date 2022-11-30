@@ -20,39 +20,56 @@ namespace PlanYourHeist
             int diffLevel = 100;
             int skillSum = 0;
             bool stillInputting = true;
-            while(stillInputting) {
-            Console.WriteLine("Enter team member's name:");
-            string memberName = Console.ReadLine();
-            if(memberName == "") {
-                stillInputting = false;
-                break;
+            while (stillInputting)
+            {
+                Console.WriteLine("Enter team member's name:");
+                string memberName = Console.ReadLine();
+                if (memberName == "")
+                {
+                    stillInputting = false;
+                    break;
+                }
+
+                Console.WriteLine("Enter team member's skill level:");
+                string answerTwo = Console.ReadLine();
+                int result = Int32.Parse(answerTwo);
+
+                Console.WriteLine("Enter team member's courage factor:");
+                string answerThree = Console.ReadLine();
+                double courageFactor = Double.Parse(answerThree);
+
+                Member ryan = new Member(memberName, result, courageFactor);
+                memberList.Add(ryan);
+
             }
 
-            Console.WriteLine("Enter team member's skill level:");
-            string answerTwo = Console.ReadLine();
-            int result = Int32.Parse(answerTwo);
-            
-            Console.WriteLine("Enter team member's courage factor:");
-            string answerThree = Console.ReadLine();
-            double courageFactor = Double.Parse(answerThree);
+            Random r = new Random();
+            int LuckLevel = r.Next(-10, 10);
 
-            Member ryan = new Member(memberName, result, courageFactor);
-            memberList.Add(ryan);
+            int BankDifficulty = LuckLevel + diffLevel;
 
-            }
+
 
             Console.WriteLine("This team is comprised of " + memberList.Count + " people");
 
-            for(int i = 0; i < memberList.Count; i++) {
+            for (int i = 0; i < memberList.Count; i++)
+            {
                 skillSum += memberList[i].SkillLevel;
             }
 
-            if(skillSum >= diffLevel ) {
+            Console.WriteLine($"Team Skill Level is {skillSum}");
+            Console.WriteLine($"Bank Difficulty Level is {BankDifficulty}");
+
+            if (skillSum >= BankDifficulty)
+            {
                 Console.WriteLine("Success");
             }
-            else {
+            else
+            {
                 Console.WriteLine("Failure");
             }
+
+
         }
     }
 }
