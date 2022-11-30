@@ -43,6 +43,17 @@ namespace PlanYourHeist
 
             }
 
+            Console.Write("How many run qould you like to attempt |");
+             string stringAttempts = Console.ReadLine();
+             int numberTrails = Int32.Parse(stringAttempts);
+
+            for (int i = 0; i < memberList.Count; i++)
+            {
+                skillSum += memberList[i].SkillLevel;
+            }
+
+            for (int k = 0; k < numberTrails; k++)
+            {
             Random r = new Random();
             int LuckLevel = r.Next(-10, 10);
 
@@ -52,14 +63,12 @@ namespace PlanYourHeist
 
             Console.WriteLine("This team is comprised of " + memberList.Count + " people");
 
-            for (int i = 0; i < memberList.Count; i++)
-            {
-                skillSum += memberList[i].SkillLevel;
-            }
 
             Console.WriteLine($"Team Skill Level is {skillSum}");
             Console.WriteLine($"Bank Difficulty Level is {BankDifficulty}");
 
+
+            
             if (skillSum >= BankDifficulty)
             {
                 Console.WriteLine("Success");
@@ -68,7 +77,7 @@ namespace PlanYourHeist
             {
                 Console.WriteLine("Failure");
             }
-
+            }
 
         }
     }
