@@ -17,7 +17,12 @@ namespace PlanYourHeist
             //Prompt the user to enter a team member's name and save that name.   
 
             List<Member> memberList = new List<Member>();
-            int diffLevel = 100;
+            Console.WriteLine("Enter difficulty level: ");
+            string diffInput = Console.ReadLine();
+            int diffLevel = Int32.Parse(diffInput);
+            Console.WriteLine("Enter number of runs: ");
+            string trialInput = Console.ReadLine();
+            int trialRuns = Int32.Parse(trialInput);
             int skillSum = 0;
             bool stillInputting = true;
             while (stillInputting)
@@ -43,31 +48,41 @@ namespace PlanYourHeist
 
             }
 
-            Random r = new Random();
-            int LuckLevel = r.Next(-10, 10);
-
-            int BankDifficulty = LuckLevel + diffLevel;
+            
 
 
 
             Console.WriteLine("This team is comprised of " + memberList.Count + " people");
 
-            for (int i = 0; i < memberList.Count; i++)
-            {
-                skillSum += memberList[i].SkillLevel;
-            }
+            int successRuns = 0;
+            int failedRuns = 0;
+            for (int i = trialRuns; i > 0; i--) {
+                for (int j = 0; j < memberList.Count; j++)
+                {
+                    skillSum += memberList[j].SkillLevel;
+                }
 
-            Console.WriteLine($"Team Skill Level is {skillSum}");
-            Console.WriteLine($"Bank Difficulty Level is {BankDifficulty}");
+                Console.WriteLine($"Team Skill Level is {skillSum}");
 
-            if (skillSum >= BankDifficulty)
-            {
-                Console.WriteLine("Success");
+                Random r = new Random();
+                int LuckLevel = r.Next(-10, 10);
+
+                int BankDifficulty = LuckLevel + diffLevel;
+                Console.WriteLine($"Bank Difficulty Level is {BankDifficulty}");
+
+                if (skillSum >= BankDifficulty)
+                {
+                    Console.WriteLine("Success");
+                    successRuns++;
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
+                    failedRuns++;
+                }
+                skillSum = 0;
             }
-            else
-            {
-                Console.WriteLine("Failure");
-            }
+            Console.WriteLine("After action report: " + successRuns + " successful runs and " + failedRuns + " failed runs" );
 
 
         }
